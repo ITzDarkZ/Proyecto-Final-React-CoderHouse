@@ -26,7 +26,7 @@ body {
     display: flex;
 }
 
-.navbar-list > li a {
+.navbar-list li a {
     color: inherit;
     text-decoration: none;
     display: block;
@@ -40,4 +40,9 @@ body {
 .active{
     background: #d2dae2;
     color: #1e272e;
+}
+
+.carrito-imagen{
+    padding: .1rem .5rem;
+    height: 2rem;
 }
