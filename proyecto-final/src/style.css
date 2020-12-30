@@ -4,6 +4,11 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 body {
     background: #d2dae2;
 }
@@ -27,13 +32,11 @@ body {
 }
 
 .navbar-list li a {
-    color: inherit;
-    text-decoration: none;
     display: block;
     padding: .57rem;
 }
 
-.navbar-brand{
+.navbar-header{
     padding: .5rem;
 }
 
@@ -45,4 +48,14 @@ body {
 .carrito-imagen{
     padding: .1rem .5rem;
     height: 2rem;
+    cursor: pointer;
+}
+
+.itemCount{
+    align-items: center;
+    text-align: center
+}
+
+.productos{
+    text-align: center;
 }
