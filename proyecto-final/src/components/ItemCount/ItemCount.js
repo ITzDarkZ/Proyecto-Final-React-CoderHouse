@@ -9,7 +9,7 @@ const ItemCount = ({inicial, stock}) => {
         if(stock !== 0){
             swal({
                 title: "Estas seguro?",
-                text: "estas seguro de que quieres agregar este producto al carrito?",
+                text: `estas seguro de que quieres agregar ${contador} unidades de este producto al carrito?`,
                 icon: "warning",
                 buttons: true,
               }).then((agregar) => {
@@ -33,7 +33,7 @@ const ItemCount = ({inicial, stock}) => {
         <div className="itemCount">
             <p className="valor">{contador}</p>
             <div className="botones">
-                <button onClick={() => {    if(stock !== 0){
+                <button onClick={ () => {    if(stock !== 0){
                                                 if(contador < stock){ 
                                                     setContador(contador + 1)
                                                 }
