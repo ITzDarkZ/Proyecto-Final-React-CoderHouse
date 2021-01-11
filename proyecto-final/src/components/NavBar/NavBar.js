@@ -9,15 +9,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 const NavBar = () => {
     return(
             <Navbar bg="dark" expand='lg' variant='dark'>
-            <Navbar.Brand href="/">Alejo Sequione</Navbar.Brand>
+            <Navbar.Brand href="/" exact='true'>Alejo Sequione</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                <Nav.Link href="/productos">Productos</Nav.Link>
+                <Nav.Link href="/">Productos</Nav.Link>
                 <NavDropdown title="Categorias" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="/libros">Libros</NavDropdown.Item>
-                    <NavDropdown.Item href="/discos">Discos</NavDropdown.Item>
-                    <NavDropdown.Item href="/electronica">Electronica</NavDropdown.Item>
+                    <NavDropdown.Item href='/category/MLA3025'>Libros</NavDropdown.Item>
                 </NavDropdown>
                 <Nav.Link href="/carrito"><CartWidget /></Nav.Link>
                 </Nav>
