@@ -9,7 +9,7 @@ const ItemCount = ({inicial, stock}) => {
         if(stock !== 0){
             swal({
                 title: "Estas seguro?",
-                text: `estas seguro de que quieres agregar ${contador} unidades de este producto al carrito?`,
+                text: `Estas seguro de que quieres agregar ${contador} unidades de este producto al carrito?`,
                 icon: "warning",
                 buttons: true,
               }).then((agregar) => {
