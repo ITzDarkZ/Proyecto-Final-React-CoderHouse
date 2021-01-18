@@ -6,23 +6,14 @@ const ItemList = ({categoria}) => {
     const [productos, setProductos] = useState([])
 
     useEffect(()=>{
-        if(categoria.categoryId === undefined){
-            fetch("https://api.mercadolibre.com/sites/MLA/search?category=MLA3025")
-            .then((res)=>{
-                return res.json()
-            })
-            .then((res)=>{
-                setProductos(res.results)
-            })
-        } else {
-            fetch(`https://api.mercadolibre.com/sites/MLA/search?category=${categoria.categoryId}`)
-                .then((res)=>{
-                    return res.json()
-                })
-                .then((res)=>{
-                    setProductos(res.results)
-                })
-        }
+        fetch("https://api.mercadolibre.com/sites/MLA/search?category=MLA3025")
+        .then((res)=>{
+            return res.json()
+        })
+        .then((res)=>{
+            setProductos(res.results)
+        })
+        
     },[])
 
     return (

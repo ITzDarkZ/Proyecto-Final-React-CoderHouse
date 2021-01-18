@@ -1,49 +1,37 @@
 import React, {useState} from 'react'
-import swal from 'sweetalert';
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Button from 'react-bootstrap/Button'
 
-const ItemCount = ({inicial, stock}) => {
-    const [contador, setContador] = useState(Number(inicial))
-    stock = Number(stock)
+const ItemCount = ({stock, onAdd, endBuy}) => {
+    const [contador, setContador] = useState(1)
 
-    const onAdd = () =>{
-        if(stock !== 0){
-            swal({
-                title: "Estas seguro?",
-                text: `Estas seguro de que quieres agregar ${contador} unidades de este producto al carrito?`,
-                icon: "warning",
-                buttons: true,
-              }).then((agregar) => {
-                if (agregar) {
-                  swal("Este producto fue agregado al carrito!", {
-                    icon: "success",
-                  });
+    const aumentarContador = (stock) => {
+        if(!endBuy){
+            if (stock !== 0){
+                if (contador < stock) {
+                    setContador(contador + 1)
                 }
-              });
-        } else {
-            swal({
-                    title: "No hay stock!",
-                    text: "No hay stock disponible para este producto",
-                    icon: "error",
-                    buttons: false
-                });
+            }
         }
     }
 
+    const disminuirContador = () => {
+        if (!endBuy){
+            if (contador > 1){
+                setContador(contador - 1)
+            }
+        }
+       
+    }
     return (
-        <div className="itemCount">
-            <p className="valor">{contador}</p>
-            <div className="botones">
-                <button onClick={ () => {    if(stock !== 0){
-                                                if(contador < stock){ 
-                                                    setContador(contador + 1)
-                                                }
-                                            }
-                                        }
-                                }>+</button>
-                <button onClick={ onAdd }>Agregar al Carrito</button>
-                <button onClick={ () => { if(contador !== 1){ setContador(contador - 1) } } }>-</button>
-            </div>
-        </div>
+        <>
+            <p style={{paddingLeft: '100px'}}>{contador}</p>
+            <ButtonGroup aria-label="ItemCounter">
+                <Button variant="dark" onClick={() => {aumentarContador(stock)}}> + </Button>
+                {endBuy ? <Button variant="dark" href="/cart"> Terminar compra </Button> : <Button variant="dark" onClick={() => {onAdd(stock, contador)}}> Añadir al carrito </Button>}
+                <Button variant="dark" onClick={disminuirContador}> - </Button>
+            </ButtonGroup>
+        </>
     )
 }
 
