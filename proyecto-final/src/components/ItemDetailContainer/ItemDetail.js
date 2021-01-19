@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col'
 import ItemCount from '../ItemCount/ItemCount'
 import swal from 'sweetalert';
 
-const ItemDetail = ({items, id, addItem, saveContext}) => {
+const ItemDetail = ({items, id, addItem}) => {
     const producto = items.find(x => x.id === id)
     
     const [compra, setCompra] = useState(false)
