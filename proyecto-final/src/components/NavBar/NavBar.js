@@ -17,7 +17,7 @@ const NavBar = () => {
                 <NavDropdown title="Categorias" id="basic-nav-dropdown">
                     <NavDropdown.Item href='/category/MLA3025'>Libros</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="/carrito"><CartWidget /></Nav.Link>
+                <Nav.Link href="/cart"><CartWidget /></Nav.Link>
                 </Nav>
             </Navbar.Collapse>
             </Navbar>

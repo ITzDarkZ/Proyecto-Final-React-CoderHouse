@@ -1,27 +1,16 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext} from 'react'
 import ItemDetail from './ItemDetail'
 import {useParams} from 'react-router-dom'
 
 
-const ItemDetailContainer = () => {
+const ItemDetailContainer = ({context}) => {
     const parametros = useParams()
+    const productos = useContext(context).Productos
+    const addItem = useContext(context).addItem
 
-    const [productos, setProductos] = useState([])
-    const [cargo, setCargo] = useState(false)
-
-    useEffect(()=>{
-        fetch('https://api.mercadolibre.com/sites/MLA/search?category=MLA3025')
-            .then((res)=>{
-                return res.json()
-            })
-            .then((res)=>{
-                setProductos(res.results)
-                setCargo(true)
-            })
-    },[])
     return (
         <>
-            {cargo ? <ItemDetail items={productos} id={parametros.id}/> : 'Cargando...'}
+            {productos.length > 0 ? <ItemDetail items={productos} id={parametros.id} addItem={addItem} /> : 'Cargando...'}
         </>
     )
 }

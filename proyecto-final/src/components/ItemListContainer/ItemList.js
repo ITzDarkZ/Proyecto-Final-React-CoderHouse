@@ -1,20 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, {useContext} from 'react'
 import Item from './Item/Item'
 
-const ItemList = ({categoria}) => {
+const ItemList = ({categoria, context}) => {
 
-    const [productos, setProductos] = useState([])
-
-    useEffect(()=>{
-        fetch("https://api.mercadolibre.com/sites/MLA/search?category=MLA3025")
-        .then((res)=>{
-            return res.json()
-        })
-        .then((res)=>{
-            setProductos(res.results)
-        })
-        
-    },[])
+    const productos = useContext(context).Productos
 
     return (
         <div className="lista-productos">

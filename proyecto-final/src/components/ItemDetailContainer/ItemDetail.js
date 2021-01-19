@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col'
 import ItemCount from '../ItemCount/ItemCount'
 import swal from 'sweetalert';
 
-const ItemDetail = ({items, id}) => {
+const ItemDetail = ({items, id, addItem, saveContext}) => {
     const producto = items.find(x => x.id === id)
     
     const [compra, setCompra] = useState(false)
@@ -21,9 +21,18 @@ const ItemDetail = ({items, id}) => {
               }).then((agregar) => {
                 if (agregar) {
                     setCompra(true)
-                    swal("Este producto fue agregado al carrito!", {
-                        icon: "success",
-                    });
+                    if(addItem(producto, cant)){
+                        swal("Este producto fue agregado al carrito!", {
+                            icon: "success",
+                        });
+                    } else {
+                        swal({
+                            title: "Ya tienes este producto en el carrito!",
+                            text: "Puedes ir al carrito para finalizar la compra",
+                            icon: "error",
+                            buttons: false
+                        });
+                    }
                 }
               });
         } else {
