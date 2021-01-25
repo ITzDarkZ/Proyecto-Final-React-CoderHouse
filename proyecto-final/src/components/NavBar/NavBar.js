@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import CartWidget from '../CartWidget/CartWidget'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -6,7 +6,9 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 
-const NavBar = () => {
+const NavBar = ({context}) => {
+    const cartLength = useContext(context).Cart.length
+
     return(
             <Navbar bg="dark" expand='lg' variant='dark'>
             <Navbar.Brand href="/" exact='true'>Alejo Sequione</Navbar.Brand>
@@ -17,8 +19,12 @@ const NavBar = () => {
                 <NavDropdown title="Categorias" id="basic-nav-dropdown">
                     <NavDropdown.Item href='/category/MLA3025'>Libros</NavDropdown.Item>
                 </NavDropdown>
-                <Nav.Link href="/cart"><CartWidget /></Nav.Link>
                 </Nav>
+                    {cartLength > 0 ? 
+                    <Nav.Link href="/cart"><CartWidget /></Nav.Link>
+                    :
+                    <></>
+                    }
             </Navbar.Collapse>
             </Navbar>
     );

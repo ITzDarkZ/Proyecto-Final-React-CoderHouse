@@ -45,7 +45,8 @@ const CartContext = ({children}) => {
     }
 
     const removeItem = id => {
-        const temp = cart.filter(element => element.id !== id)
+        const temp = cart.filter(element => element.item.id !== id)
+        localStorage.setItem('Cart', JSON.stringify(temp))
         setCart(temp)
     }
 
@@ -54,7 +55,7 @@ const CartContext = ({children}) => {
     }
 
     return (
-        <Provider value={{Productos: prod, Cart: {item: cart.item, cantidad: cart.cantidad}, addItem: addItem, removeItem: removeItem, clear: clear, isInCart: isInCart}}>
+        <Provider value={{Productos: prod, Cart: cart, addItem: addItem, removeItem: removeItem, clear: clear, isInCart: isInCart}}>
             {children}
         </Provider>   
     )

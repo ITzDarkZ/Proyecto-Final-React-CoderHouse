@@ -10,7 +10,7 @@ const App = () => {
     return(
         <CartContext>
             <Router>
-                <NavBar/>
+                <NavBar context={contextCart}/>
                 <Switch>
                     <Route path='/' exact>
                         <ItemListContainer context={contextCart} />
