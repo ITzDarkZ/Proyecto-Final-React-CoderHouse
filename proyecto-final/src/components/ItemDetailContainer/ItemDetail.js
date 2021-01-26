@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ItemCount from '../ItemCount/ItemCount'
 import swal from 'sweetalert';
+import './style.css'
 
 const ItemDetail = ({items, id, addItem}) => {
     const producto = items.find(x => x.id === id)
@@ -46,15 +47,13 @@ const ItemDetail = ({items, id, addItem}) => {
     }
 
     return (
-            <Container fluid>
+        <div className='mainDiv'>
+            <Container>
                 <Row>
                     <Col md='6'>
-                        <img
-                            width={240}
-                            height={240}
-                            className="image-responsive"
-                            src={producto.thumbnail}
-                            alt={producto.title}
+                        <img className="image-responsive"
+                             src={producto.image}
+                             alt={producto.title}
                         />
                     </Col>
                     <Col md='6'>
@@ -63,18 +62,19 @@ const ItemDetail = ({items, id, addItem}) => {
                         </Row>
                         <Row>
                             <Col md='12'>
-                                <p>Descripcion del producto</p>
+                                <p>{producto.descripcion}</p>
                             </Col>
                         </Row>
                         <Row>
-                            <Col><h2>${producto.price}</h2></Col>
+                            <Col><h2>Precio: ${producto.price}</h2></Col>
                         </Row>
                         <Row>
-                            <Col><ItemCount stock={producto.available_quantity} onAdd={onAdd} endBuy={compra}/></Col>
+                            <Col><ItemCount stock={producto.stock} onAdd={onAdd} endBuy={compra}/></Col>
                         </Row>
                     </Col>
                 </Row>
             </Container>
+        </div>
     )
 }
 

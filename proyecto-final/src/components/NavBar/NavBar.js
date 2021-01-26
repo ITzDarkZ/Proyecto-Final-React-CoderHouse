@@ -17,7 +17,9 @@ const NavBar = ({context}) => {
                 <Nav className="mr-auto">
                 <Nav.Link href="/">Productos</Nav.Link>
                 <NavDropdown title="Categorias" id="basic-nav-dropdown">
-                    <NavDropdown.Item href='/category/MLA3025'>Libros</NavDropdown.Item>
+                    <NavDropdown.Item href='/category/0'>Libros</NavDropdown.Item>
+                    <NavDropdown.Item href='/category/1'>Electronica</NavDropdown.Item>
+                    <NavDropdown.Item href='/category/2'>Libreria</NavDropdown.Item>
                 </NavDropdown>
                 </Nav>
                     {cartLength > 0 ? 

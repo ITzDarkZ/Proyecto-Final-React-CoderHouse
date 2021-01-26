@@ -1,4 +1,5 @@
 import React, {createContext, useState, useEffect} from 'react'
+import {firestore as db} from '../../firebaseConfig'
 
 export const contextCart = createContext({Productos: null, Cart: null})
 const {Provider} = contextCart
@@ -12,17 +13,32 @@ const CartContext = ({children}) => {
             return []
         }
     }
+    const cargarProductos = () => {
+        const infoCarrito = localStorage.getItem('Productos');
+        if(infoCarrito) {
+            return JSON.parse(infoCarrito);
+        } else {
+            return []
+        }
+    }
 
-    const [prod, setProd] = useState([])
+    const [prod, setProd] = useState(cargarProductos())
     const [cart, setCart] = useState(cargarCarrito())
 
     useEffect(()=>{
-        fetch("https://api.mercadolibre.com/sites/MLA/search?category=MLA3025")
+        const collection = db.collection('ItemCollection')
+        const query = collection.get()
+        query
         .then((res)=>{
-            return res.json()
+            const productos = res.docs
+            const prodMap = productos.map(item=>{
+                return {id: item.id, ...item.data()}
+            })
+            setProd(prodMap)
+            localStorage.setItem('Productos', JSON.stringify(prodMap))
         })
-        .then((res)=>{
-            setProd(res.results)
+        .catch(err => {
+            console.error(err)
         })
     },[])
 

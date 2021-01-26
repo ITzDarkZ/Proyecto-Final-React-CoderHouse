@@ -25,7 +25,7 @@ const ItemCount = ({stock, onAdd, endBuy}) => {
     }
     return (
         <>
-            <p style={{paddingLeft: '100px'}}>{contador}</p>
+            <p>{contador}</p>
             <ButtonGroup aria-label="ItemCounter">
                 <Button variant="dark" onClick={() => {aumentarContador(stock)}}> + </Button>
                 {endBuy ? <Button variant="dark" href="/cart"> Terminar compra </Button> : <Button variant="dark" onClick={() => {onAdd(stock, contador)}}> Añadir al carrito </Button>}

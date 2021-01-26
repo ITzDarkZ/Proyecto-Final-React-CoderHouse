@@ -33,12 +33,12 @@ const Cart = () => {
             {cart.length > 0 ?
                 cart.map((prod, i) => {
                     return(
-                        <div key={i} style={{padding: '3rem 1rem 1rem 5.5rem', float: 'left'}}>
+                        <div key={prod.item.id} style={{padding: '3rem 1rem 1rem 5.5rem', float: 'left'}}>
                             <Card style={{ width: '16rem'}}>
                                 <Card.Img style={{maxHeight: '90px', maxWidth:'90px', display: 'block', margin:'0 auto'}} variant="top" src={prod.item.thumbnail} />
                                 <Card.Body>
                                 <Card.Title style={{height: '130px'}}>{prod.item.title}</Card.Title>
-                                <Card.Text>Detalle del producto</Card.Text>
+                                <Card.Text>{prod.item.descripcion}</Card.Text>
                                 </Card.Body>
                                 <Card.Footer style={{margin: '0 auto', textAlign: 'center'}}>
                                     <small>
