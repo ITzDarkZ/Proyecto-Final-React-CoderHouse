@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ItemCount from '../ItemCount/ItemCount'
 import swal from 'sweetalert';
-import './style.css'
 
 const ItemDetail = ({items, id, addItem}) => {
     const producto = items.find(x => x.id === id)
@@ -47,7 +46,7 @@ const ItemDetail = ({items, id, addItem}) => {
     }
 
     return (
-        <div className='mainDiv'>
+        <div style={{margin: '0 auto', textAlign: 'center', padding: '10rem'}}>
             <Container>
                 <Row>
                     <Col md='6'>

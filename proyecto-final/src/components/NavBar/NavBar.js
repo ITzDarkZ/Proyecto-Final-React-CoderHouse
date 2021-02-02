@@ -5,9 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import {Link} from 'react-router-dom'
+import OrderWidget from '../OrderWidget/OrderWidget';
 
 const NavBar = ({context}) => {
     const cartLength = useContext(context).Cart.length
+    const orderLength = useContext(context).Orders.length
 
     return(
             <Navbar bg="dark" expand='lg' variant='dark'>
@@ -15,21 +18,28 @@ const NavBar = ({context}) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                <Nav.Link href="/">Productos</Nav.Link>
+                <Nav.Link href="/" exact='true'>Productos</Nav.Link>
                 <NavDropdown title="Categorias" id="basic-nav-dropdown">
-                    <NavDropdown.Item href='/category/0'>Libros</NavDropdown.Item>
-                    <NavDropdown.Item href='/category/1'>Electronica</NavDropdown.Item>
-                    <NavDropdown.Item href='/category/2'>Libreria</NavDropdown.Item>
+                    <NavDropdown.Item><Link style={{ color: 'inherit', textDecoration: 'inherit'}} to='/category/0'>Libros</Link></NavDropdown.Item>
+                    <NavDropdown.Item><Link style={{ color: 'inherit', textDecoration: 'inherit'}} to='/category/1'>Electronica</Link></NavDropdown.Item>
+                    <NavDropdown.Item><Link style={{ color: 'inherit', textDecoration: 'inherit'}} to='/category/2'>Libreria</Link></NavDropdown.Item>
                 </NavDropdown>
                 </Nav>
                     {cartLength > 0 ? 
-                    <Nav.Link href="/cart"><CartWidget /></Nav.Link>
+                    <Nav.Item><Link style={{ color: 'inherit', textDecoration: 'inherit'}} to='/cart'><CartWidget /></Link></Nav.Item>
                     :
-                    <></>
+                    null
+                    }
+                    {
+                    orderLength > 0 ? 
+                    <Nav.Item><Link style={{ color: 'inherit', textDecoration: 'inherit'}} to='/orders'><OrderWidget /></Link></Nav.Item>
+                    :
+                    null
                     }
             </Navbar.Collapse>
             </Navbar>
     );
 }
+
 
 export default NavBar;

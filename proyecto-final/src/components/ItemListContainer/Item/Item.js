@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import ListGroupItem from 'react-bootstrap/ListGroupItem'
+import {Link} from 'react-router-dom'
 
 const Item = ({titulo, precio, mercadopago, imagen, id}) => {
     return (
@@ -17,7 +18,7 @@ const Item = ({titulo, precio, mercadopago, imagen, id}) => {
                 <ListGroupItem>Acepta Mercadopago? {mercadopago ? 'Si' : 'No'}</ListGroupItem>
             </ListGroup>
             <Card.Body style={{textAlign: 'center'}}>
-                <Card.Link href={'/item/' + id}>Ver detalle</Card.Link>
+                <Card.Text><Link style={{textDecoration: 'inherit'}} to={'/item/' + id}>Ver detalle</Link></Card.Text>
             </Card.Body>
             </Card>
         </div>

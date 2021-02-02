@@ -13,17 +13,18 @@ const CartContext = ({children}) => {
             return []
         }
     }
-    const cargarProductos = () => {
-        const infoCarrito = localStorage.getItem('Productos');
-        if(infoCarrito) {
-            return JSON.parse(infoCarrito);
+    const getOrders = () => {
+        const infoOrders = localStorage.getItem('Orders');
+        if(infoOrders) {
+            return JSON.parse(infoOrders);
         } else {
             return []
         }
     }
-
-    const [prod, setProd] = useState(cargarProductos())
+    const [prod, setProd] = useState([])
     const [cart, setCart] = useState(cargarCarrito())
+    const [categoria, setCategoria] = useState([])
+    const [orders, setOrders] = useState(getOrders())
 
     useEffect(()=>{
         const collection = db.collection('ItemCollection')
@@ -31,11 +32,10 @@ const CartContext = ({children}) => {
         query
         .then((res)=>{
             const productos = res.docs
-            const prodMap = productos.map(item=>{
+            const prodMap = productos.map(item =>{
                 return {id: item.id, ...item.data()}
             })
             setProd(prodMap)
-            localStorage.setItem('Productos', JSON.stringify(prodMap))
         })
         .catch(err => {
             console.error(err)
@@ -48,6 +48,18 @@ const CartContext = ({children}) => {
         } else {
             return true
         }
+    }
+
+    const buscarCategoria = (categoryId) => {
+        const collection = db.collection('ItemCollection')
+        const query = collection.where('categoryId', '==', categoryId).get()
+        query
+        .then(({docs})=>{
+            const categoriaFiltrada = docs.map((item)=>{
+                return {id: item.id, ...item.data()}
+            })
+            setCategoria(categoriaFiltrada)
+        })
     }
 
     const addItem = (item, cantidad) => {
@@ -68,10 +80,25 @@ const CartContext = ({children}) => {
 
     const clear = () => {
         setCart([])
+        localStorage.setItem('Cart', JSON.stringify([]))
+    }
+
+    const refreshOrders = (order) => {
+        setOrders([...orders, order])
+        localStorage.setItem('Orders', JSON.stringify([...orders, order]))
     }
 
     return (
-        <Provider value={{Productos: prod, Cart: cart, addItem: addItem, removeItem: removeItem, clear: clear, isInCart: isInCart}}>
+        <Provider value={{Productos: prod,
+                          Cart: cart,
+                          addItem: addItem, 
+                          removeItem: removeItem, 
+                          clear: clear, 
+                          isInCart: isInCart, 
+                          Categoria: categoria, 
+                          buscarCategoria: buscarCategoria,
+                          Orders: orders,
+                          refreshOrders: refreshOrders}}>
             {children}
         </Provider>   
     )
