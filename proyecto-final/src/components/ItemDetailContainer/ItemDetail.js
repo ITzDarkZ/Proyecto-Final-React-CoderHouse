@@ -4,6 +4,9 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ItemCount from '../ItemCount/ItemCount'
+import Jumbotron from 'react-bootstrap/Jumbotron'
+import Button from 'react-bootstrap/Button'
+import {Link} from 'react-router-dom'
 import swal from 'sweetalert';
 
 const ItemDetail = ({items, id, addItem}) => {
@@ -46,34 +49,48 @@ const ItemDetail = ({items, id, addItem}) => {
     }
 
     return (
-        <div style={{margin: '0 auto', textAlign: 'center', padding: '10rem'}}>
-            <Container>
-                <Row>
-                    <Col md='6'>
-                        <img className="image-responsive"
-                             src={producto.image}
-                             alt={producto.title}
-                        />
-                    </Col>
-                    <Col md='6'>
-                        <Row>
-                            <Col md='12'><h1>{producto.title}</h1></Col>
-                        </Row>
-                        <Row>
-                            <Col md='12'>
-                                <p>{producto.descripcion}</p>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col><h2>Precio: ${producto.price}</h2></Col>
-                        </Row>
-                        <Row>
-                            <Col><ItemCount stock={producto.stock} onAdd={onAdd} endBuy={compra}/></Col>
-                        </Row>
-                    </Col>
-                </Row>
-            </Container>
-        </div>
+        <>
+        {producto ? 
+            <div style={{margin: '0 auto', textAlign: 'center', padding: '10rem'}}>
+                <Container>
+                    <Row>
+                        <Col md='6'>
+                            <img className="image-responsive"
+                                src={producto.image}
+                                alt={producto.title}
+                            />
+                        </Col>
+                        <Col md='6'>
+                            <Row>
+                                <Col md='12'><h1>{producto.title}</h1></Col>
+                            </Row>
+                            <Row>
+                                <Col md='12'>
+                                    <p>{producto.descripcion}</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col><h2>Precio: ${producto.price}</h2></Col>
+                            </Row>
+                            <Row>
+                                <Col><ItemCount stock={producto.stock} onAdd={onAdd} endBuy={compra}/></Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+        :
+            <Jumbotron fluid style={{background: 'white', width: '98vw', height: '88vh'}}>
+                <div style={{margin:'0 auto', textAlign: 'center', padding: '10rem'}}>
+                    <h1>No se encontro este producto!</h1>
+                    <p>Puede volver al inicio con este boton</p>
+                    <p>
+                        <Button variant="dark"><Link to='/' style={{ color: 'inherit', textDecoration: 'inherit'}}>Inicio</Link></Button>
+                    </p>
+                </div>
+            </Jumbotron>
+        }
+        </>
     )
 }
 

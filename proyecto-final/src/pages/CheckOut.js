@@ -2,10 +2,9 @@ import React, { useContext, useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { contextCart } from '../components/CartContext/CartContext'
-import firebase from 'firebase'
 import InputGroup from 'react-bootstrap/InputGroup'
 import swal from 'sweetalert'
-import { firestore as db } from '../firebaseConfig'
+import { firestore as db, fb as firebase } from '../firebaseConfig'
 import { Link } from 'react-router-dom'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 
@@ -85,10 +84,16 @@ const CheckOut = () => {
             }
             refreshOrders(order)
             const collection = db.collection('Orders')
-            collection.add(order)
+            collection
+            .add(order)
             .then((res) => {
                 setId(res.id)
-                
+                const collection = db.collection('ItemCollection')
+                const batch = db.batch()
+                cart.forEach((element) => {
+                    batch.update(collection.doc(element.item.id), {stock: element.item.stock - element.cantidad})
+                })
+                batch.commit()
             })
             .catch((err) => {
                 console.error(err)

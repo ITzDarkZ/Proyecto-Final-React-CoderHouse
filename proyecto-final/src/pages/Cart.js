@@ -71,7 +71,7 @@ const Cart = () => {
                     <h1>Tu carrito esta vacio!</h1>
                     <p>Ve a la tienda a comprar algo!</p>
                     <p>
-                        <Button variant="dark" href='/'>Tienda</Button>
+                        <Button variant="dark"><Link to='/' exact style={{ color: 'inherit', textDecoration: 'inherit'}}>Tienda</Link></Button>
                     </p>
                 </div>
             </Jumbotron>

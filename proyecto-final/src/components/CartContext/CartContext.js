@@ -7,19 +7,11 @@ const {Provider} = contextCart
 const CartContext = ({children}) => {
     const cargarCarrito = () => {
         const infoCarrito = localStorage.getItem('Cart');
-        if(infoCarrito) {
-            return JSON.parse(infoCarrito);
-        } else {
-            return []
-        }
+        return infoCarrito ? JSON.parse(infoCarrito) : []
     }
     const getOrders = () => {
         const infoOrders = localStorage.getItem('Orders');
-        if(infoOrders) {
-            return JSON.parse(infoOrders);
-        } else {
-            return []
-        }
+        return infoOrders ? JSON.parse(infoOrders) : []
     }
     const [prod, setProd] = useState([])
     const [cart, setCart] = useState(cargarCarrito())
